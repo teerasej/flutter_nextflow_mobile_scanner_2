@@ -18,8 +18,6 @@ class BarcodePage extends StatelessWidget {
         );
       }
 
-      barcodeController.barcodeValue.value = value;
-
       return Text(
         value,
         overflow: TextOverflow.fade,
@@ -28,7 +26,7 @@ class BarcodePage extends StatelessWidget {
     }
 
     void _handleBarcode(BarcodeCapture barcodes) {
-      barcodeController.barcodeValue.value = barcodes.barcodes.firstOrNull?.displayValue ?? '';
+      
     }
 
   @override
@@ -40,12 +38,7 @@ class BarcodePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
-              child: MobileScanner(
-                onDetect: _handleBarcode,
-              ),
-            ),
-            Center(child: Obx(() => _buildBarcode(barcodeController.barcodeValue.value))),
+            
           ],
         ),
       ),

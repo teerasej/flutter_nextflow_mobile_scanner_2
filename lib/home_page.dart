@@ -22,7 +22,6 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Scan Barcode'),
             ),
-            Obx(() => Text(controller.barcodeValue.value),)
           ],
         ),
       ),
