@@ -10,30 +10,27 @@ class BarcodePage extends StatelessWidget {
   final BarcodeController barcodeController = Get.find();
 
   Widget _buildBarcode(String value) {
-      if (value.isEmpty) {
-        return const Text(
-          'Scan something!',
-          overflow: TextOverflow.fade,
-          style: TextStyle(color: Colors.white),
-        );
-      }
-
-      barcodeController.barcodeValue.value = value;
-
-      return Text(
-        value,
-        overflow: TextOverflow.fade,
-        style: const TextStyle(color: Colors.white),
-      );
+    var message = "";
+    if (value.isEmpty) {
+      message = "Scan something...";
+    } else {
+      message = value;
     }
 
-    void _handleBarcode(BarcodeCapture barcodes) {
-      barcodeController.barcodeValue.value = barcodes.barcodes.firstOrNull?.displayValue ?? '';
-    }
+    return Text(
+      message,
+      overflow: TextOverflow.fade,
+      style: const TextStyle(color: Colors.white),
+    );
+  }
+
+  void _handleBarcode(BarcodeCapture barcodes) {
+    barcodeController.barcodeValue.value =
+        barcodes.barcodes.firstOrNull?.displayValue ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(title: const Text('Scan Barcode')),
       backgroundColor: Colors.black,
@@ -45,7 +42,9 @@ class BarcodePage extends StatelessWidget {
                 onDetect: _handleBarcode,
               ),
             ),
-            Center(child: Obx(() => _buildBarcode(barcodeController.barcodeValue.value))),
+            Center(
+                child: Obx(
+                    () => _buildBarcode(barcodeController.barcodeValue.value))),
           ],
         ),
       ),
